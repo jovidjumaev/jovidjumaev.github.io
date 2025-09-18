@@ -6,92 +6,53 @@
     <title>Jovid Jumaev - Portfolio</title>
     <style>
         body {
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
-            padding: 0;
+            padding: 40px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .container {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 3rem 2rem;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-            max-width: 500px;
-            width: 90%;
-        }
-        
-        h1 {
-            color: #333;
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            font-weight: 300;
-            letter-spacing: 2px;
-        }
-        
-        .chatbot-button {
-            display: inline-block;
-            padding: 15px 30px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
             color: white;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        .nav-link {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 15px 30px;
             text-decoration: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            letter-spacing: 1px;
+            border-radius: 8px;
             transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
-            border: none;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
-        
-        .chatbot-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 25px rgba(102, 126, 234, 0.4);
-            background: linear-gradient(45deg, #764ba2, #667eea);
-        }
-        
-        .chatbot-button:active {
-            transform: translateY(-1px);
-        }
-        
-        .chatbot-button::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .chatbot-button:hover::before {
-            left: 100%;
-        }
-        
-        .icon {
-            margin-right: 8px;
-            font-size: 1.2rem;
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Jovid Jumaev</h1>
-        <a href="chatbot.html" class="chatbot-button">
-            <span class="icon">🤖</span>
-            Chat with AI Assistant
-        </a>
+        <p>Welcome to my portfolio website</p>
+        
+        <div class="nav-links">
+            <a href="chatbot.html" class="nav-link">🤖 AI Chatbot</a>
+        </div>
     </div>
 </body>
 </html>
