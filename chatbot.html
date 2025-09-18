@@ -3,34 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpenAI Chat Example</title>
+    <title>Advanced AI Chatbot</title>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <h1>OpenAI Chat Example</h1>
-    
-    <!-- API Key Input Section -->
-    <div id="apiKeySection">
-        <h3>Enter your OpenAI API Key to start chatting:</h3>
-        <input type="password" id="apiKeyInput" placeholder="Enter your OpenAI API key here..." />
-        <button id="setApiKey">Set API Key</button>
-        <p id="apiKeyStatus"></p>
-        <p style="font-size: 12px; color: #666; margin-top: 10px;">
-            <strong>Security Note:</strong> Your API key is not stored anywhere and will be cleared when you close this page.
-        </p>
-    </div>
-    
-    <!-- Chat Section (initially hidden) -->
-    <div id="chatSection" style="display: none;">
-        <div id="chat"></div>
-        <div style="margin-top: 10px;">
-            <input type="text" id="input" placeholder="Type your message here..." />
-            <button id="send">Send</button>
-            <button id="clearChat">Clear Chat</button>
-            <button id="changeApiKey" style="background-color: #6c757d; color: white; border: none; padding: 10px; margin-left: 5px; border-radius: 4px; cursor: pointer;">Change API Key</button>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="header-left">
+                    <a href="index.html" class="back-btn" title="Back to Home">
+                        <span>←</span>
+                    </a>
+                    <h1>Advanced AI Chatbot</h1>
+                </div>
+                <div class="theme-toggle">
+                    <button id="themeToggle" class="theme-btn">
+                        <span id="themeIcon">🌙</span>
+                        <span id="themeText">Dark</span>
+                    </button>
+                </div>
+            </div>
+            <p class="subtitle">Dynamic System Prompts & Custom Roles</p>
+        </header>
+        
+        <!-- API Key Input Section (Full Width) -->
+        <div id="apiKeySection" class="card api-key-centered">
+            <h3>🔑 Enter your OpenAI API Key</h3>
+            <input type="password" id="apiKeyInput" placeholder="sk-..." />
+            <button id="setApiKey">Connect</button>
+            <p id="apiKeyStatus"></p>
+            <p class="security-note">
+                <strong>🔒 Security:</strong> Your API key is not stored and will be cleared when you close this page.
+            </p>
+        </div>
+        
+        <!-- Main Layout with Sidebar (initially hidden) -->
+        <div class="main-layout" id="mainLayout" style="display: none;">
+            <!-- Sidebar for Chat History -->
+            <aside class="sidebar" id="sidebar">
+                <div class="sidebar-header">
+                    <h3>Chat History</h3>
+                    <div class="sidebar-actions-top">
+                        <button id="newConversation" class="new-chat-btn" title="New Chat">
+                            <span>+</span>
+                        </button>
+                        <button id="toggleSidebar" class="sidebar-toggle">×</button>
+                    </div>
+                </div>
+                <div class="sidebar-content">
+                    <div class="conversation-list" id="conversationList">
+                        <p class="no-history">No conversations yet</p>
+                    </div>
+                    <div class="sidebar-actions">
+                        <button id="exportAllConversations">Export All</button>
+                        <button id="clearAllHistory">Clear All</button>
+                    </div>
+                </div>
+            </aside>
+            
+            <!-- Main Content Area -->
+            <main class="main-content">
+                <!-- Enhanced Chat Section -->
+                <div id="chatSection" class="card">
+                    
+                    <!-- System Prompt Management -->
+                    <div class="control-panel">
+                        <h3>🎭 System Prompt & Role Management</h3>
+                        
+                        <!-- System Prompt Controls -->
+                        <div class="system-prompt-section">
+                            <label for="systemPromptInput">System Prompt</label>
+                            <textarea id="systemPromptInput" placeholder="Enter custom system prompt (e.g., 'You are a helpful coding assistant who explains things clearly...')">You are a helpful assistant.</textarea>
+                            <div class="prompt-buttons">
+                                <button id="updateSystemPrompt">Update Prompt</button>
+                                <select id="presetPrompts">
+                                    <option value="">-- Choose Preset --</option>
+                                    <option value="You are a helpful assistant.">Default Assistant</option>
+                                    <option value="You are an expert software developer. Provide clear, concise code explanations and solutions.">Coding Expert</option>
+                                    <option value="You are a creative writing assistant. Help with storytelling, character development, and narrative structure.">Creative Writer</option>
+                                    <option value="You are a professional business consultant. Provide strategic advice and business insights.">Business Consultant</option>
+                                    <option value="You are a patient teacher. Explain complex topics in simple terms with examples.">Patient Teacher</option>
+                                    <option value="You are a critical thinker. Challenge ideas, ask probing questions, and provide balanced analysis.">Critical Thinker</option>
+                                    <option value="You are a friendly conversationalist. Be casual, engaging, and use humor when appropriate.">Casual Friend</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- Role Selection for Messages -->
+                        <div class="role-section">
+                            <label for="messageRole">Message Role</label>
+                            <select id="messageRole">
+                                <option value="user">👤 User</option>
+                                <option value="assistant">🤖 Assistant</option>
+                                <option value="system">⚙️ System</option>
+                                <option value="moderator">🛡️ Moderator</option>
+                                <option value="expert">🎓 Expert</option>
+                                <option value="critic">🔍 Critic</option>
+                                <option value="facilitator">🎯 Facilitator</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Conversation Controls -->
+                        <div class="conversation-controls">
+                            <button id="exportConversation">📁 Export</button>
+                            <button id="importConversation">📂 Import</button>
+                            <input type="file" id="importFile" accept=".json" style="display: none;">
+                            <button id="viewHistory">📜 History</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Chat Display -->
+                    <div id="chat"></div>
+                    
+                    <!-- Message Input Section -->
+                    <div class="input-section">
+                        <div class="message-input-container">
+                            <div class="role-indicator" id="roleIndicator">👤 User</div>
+                            <textarea id="input" placeholder="Type your message here..." rows="2"></textarea>
+                            <div class="input-buttons">
+                                <button id="send">Send</button>
+                                <button id="clearChat">Clear</button>
+                                <button id="changeApiKey">🔑 Key</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </main>
+        </div>
+        
+        <!-- Conversation History Modal (initially hidden) -->
+        <div id="historyModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h3>📜 Conversation History</h3>
+                <div id="historyContent"></div>
+                <button id="clearHistory">Clear All History</button>
+            </div>
         </div>
     </div>
 </body>
