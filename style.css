@@ -1,0 +1,92 @@
+body { 
+    font-family: Arial, sans-serif; 
+    margin: 20px; 
+    background-color: #f5f5f5;
+}
+
+#apiKeySection {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+#apiKeyInput {
+    width: 70%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#setApiKey {
+    width: 25%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#setApiKey:hover {
+    background-color: #0056b3;
+}
+
+#chatSection {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#chat { 
+    border: 1px solid #ccc; 
+    padding: 15px; 
+    height: 400px; 
+    overflow-y: scroll; 
+    background-color: #fafafa;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+#input { 
+    width: 70%; 
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#send, #clearChat { 
+    width: 14%; 
+    padding: 10px;
+    margin-left: 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#send {
+    background-color: #28a745;
+    color: white;
+}
+
+#send:hover {
+    background-color: #218838;
+}
+
+#clearChat {
+    background-color: #dc3545;
+    color: white;
+}
+
+#clearChat:hover {
+    background-color: #c82333;
+}
+
+#apiKeyStatus {
+    color: #28a745;
+    font-weight: bold;
+    margin-top: 10px;
+}
