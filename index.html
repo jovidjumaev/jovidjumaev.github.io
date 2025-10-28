@@ -1425,14 +1425,7 @@
           </div>
 
           <div class="animate-on-scroll">
-            <form id="contact-form" action="https://formsubmit.co/jovid.jumaev01@gmail.com" method="POST" class="glass-card p-8 rounded-lg">
-              <!-- Redirect after submission -->
-              <input type="hidden" name="_next" value="https://jovidjumaev.github.io/thank-you.html">
-              <input type="hidden" name="_subject" value="Portfolio Contact Form Submission">
-              <input type="hidden" name="_captcha" value="false">
-              
-              <!-- Auto response message -->
-              <input type="hidden" name="_autoresponse" value="Thank you for your message. I will get back to you soon.">
+            <form id="contact-form" method="POST" class="glass-card p-8 rounded-lg">
 
               <!-- Enhanced honeypot fields to catch bots -->
               <input type="text" name="_honey" style="display:none !important; position:absolute !important; left:-9999px !important;">
@@ -2109,8 +2102,31 @@
         document.getElementById("form-timestamp").value = formStartTime;
         document.getElementById("form-timezone").value = Intl.DateTimeFormat().resolvedOptions().timeZone;
         
-        // Allow default form submission to handle activation
-        // Once activated, FormSubmit will handle submissions automatically
+        // Handle form submission
+        contactForm.addEventListener("submit", async function(e) {
+          e.preventDefault();
+          
+          const name = document.getElementById('name').value;
+          const email = document.getElementById('email').value;
+          const subject = document.getElementById('subject').value;
+          const message = document.getElementById('message').value;
+          
+          // Show loading
+          submitButton.innerHTML = "Sending...";
+          submitButton.disabled = true;
+          
+          // Create email body
+          const emailBody = `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\n\nMessage:\n${message}`;
+          
+          // Use mailto (opens email client)
+          const mailtoLink = `mailto:jovid.jumaev01@gmail.com?subject=${encodeURIComponent('Portfolio Contact: ' + subject)}&body=${encodeURIComponent(emailBody)}`;
+          
+          // Try to open mailto
+          window.location.href = mailtoLink;
+          
+          // Note: This will open the user's email client
+          // If they want automatic sending without email client, they need to set up EmailJS
+        });
         
         // Character counter for message
         messageTextarea.addEventListener("input", function() {
