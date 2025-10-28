@@ -1,0 +1,2338 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Jovid Jumaev</title>
+    
+    <!-- Favicon and Icons -->
+    <link rel="icon" type="image/png" href="images/diamond.png" class="favicon-blue">
+    <link rel="apple-touch-icon" href="images/diamond.png" class="favicon-blue">
+    <link rel="shortcut icon" type="image/png" href="images/diamond.png" class="favicon-blue">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#6d28d9", secondary: "#4f46e5" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+
+      :root {
+          --dark-bg: #121212;
+          --dark-surface: #1e1e1e;
+          --dark-surface-2: #2d2d2d;
+          --text-primary: #ffffff;
+          --text-secondary: rgba(255, 255, 255, 0.7);
+          --accent-purple: #6d28d9;
+          --accent-indigo: #4f46e5;
+      }
+
+      /* Favicon color filter */
+      .favicon-blue {
+          filter: invert(24%) sepia(98%) saturate(1944%) hue-rotate(230deg) brightness(90%) contrast(101%);
+      }
+
+      body {
+          font-family: 'Inter', sans-serif;
+          background-color: var(--dark-bg);
+          color: var(--text-primary);
+      }
+
+      .glass-card {
+          background: rgba(30, 30, 30, 0.5);
+          backdrop-filter: blur(12px);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .neomorphic {
+          background: var(--dark-surface);
+          box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3),
+                      -5px -5px 10px rgba(255, 255, 255, 0.05);
+      }
+
+      .gradient-text {
+          background: linear-gradient(90deg, var(--accent-purple), var(--accent-indigo));
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+      }
+
+      .gradient-border {
+          position: relative;
+          border: double 1px transparent;
+          background-image: linear-gradient(var(--dark-surface), var(--dark-surface)),
+                            linear-gradient(90deg, var(--accent-purple), var(--accent-indigo));
+          background-origin: border-box;
+          background-clip: padding-box, border-box;
+      }
+
+      .glow-on-hover:hover {
+          box-shadow: 0 0 15px rgba(109, 40, 217, 0.5);
+      }
+
+      .skill-bar {
+          height: 8px;
+          background: var(--dark-surface-2);
+          border-radius: 4px;
+          overflow: hidden;
+      }
+
+      .skill-progress {
+          height: 100%;
+          background: linear-gradient(90deg, var(--accent-purple), var(--accent-indigo));
+          border-radius: 4px;
+          width: 0%;
+          transition: width 1.5s ease-in-out;
+      }
+
+      .timeline-item {
+          position: relative;
+          padding-left: 30px;
+      }
+
+      .timeline-item::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0;
+          height: 100%;
+          width: 2px;
+          background: linear-gradient(to bottom, var(--accent-purple), var(--accent-indigo));
+      }
+
+      .timeline-dot {
+          position: absolute;
+          left: -5px;
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          background: linear-gradient(90deg, var(--accent-purple), var(--accent-indigo));
+      }
+
+      .timeline-date {
+          color: var(--accent-purple);
+          font-weight: 600;
+      }
+
+      /* Form Styles */
+      input, textarea {
+          background-color: var(--dark-surface);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          color: var(--text-primary);
+          transition: all 0.3s ease;
+      }
+
+      input:focus, textarea:focus {
+          border-color: var(--accent-purple);
+          box-shadow: 0 0 0 2px rgba(109, 40, 217, 0.2);
+          outline: none;
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+      }
+
+      .animate-on-scroll {
+          opacity: 0;
+          transform: translateY(20px);
+          transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      }
+
+      .animate-on-scroll.visible {
+          opacity: 1;
+          transform: translateY(0);
+      }
+
+      @keyframes typing {
+          from { width: 0 }
+          to { width: 100% }
+      }
+
+      .typing-animation {
+          overflow: hidden;
+          white-space: nowrap;
+          border-right: 2px solid var(--accent-purple);
+          animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+      }
+
+      @keyframes blink-caret {
+          from, to { border-color: transparent }
+          50% { border-color: var(--accent-purple) }
+      }
+
+      /* Project Card Tilt Effect */
+      .tilt-card {
+          transform-style: preserve-3d;
+          transition: transform 0.5s ease;
+      }
+
+      .tilt-card:hover {
+          transform: perspective(1000px) rotateX(5deg) rotateY(5deg) scale(1.05);
+      }
+
+      /* Mobile Menu */
+      .mobile-menu {
+          transform: translateX(100%);
+          transition: transform 0.3s ease-in-out;
+      }
+
+      .mobile-menu.open {
+          transform: translateX(0);
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+          width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+          background: var(--dark-bg);
+      }
+
+      ::-webkit-scrollbar-thumb {
+          background: var(--dark-surface-2);
+          border-radius: 4px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+          background: var(--accent-purple);
+      }
+
+      /* Project modal */
+      .project-modal {
+          opacity: 0;
+          visibility: hidden;
+          transition: opacity 0.3s ease, visibility 0.3s ease;
+      }
+
+      .project-modal.open {
+          opacity: 1;
+          visibility: visible;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen">
+    <!-- Loading Screen -->
+    <div
+      id="loading-screen"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-[#121212]"
+    >
+      <div class="text-center">
+        <h1 class="text-4xl font-bold mb-4 gradient-text">Jovid Jumaev</h1>
+        <div class="w-64 h-1 bg-[#2d2d2d] rounded-full mx-auto overflow-hidden">
+          <div
+            id="loading-bar"
+            class="h-full bg-gradient-to-r from-primary to-secondary w-0 transition-all duration-1000"
+          ></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-40 glass-card">
+      <nav
+        class="container mx-auto px-6 py-4 flex items-center justify-between"
+      >
+        <a href="#hero" class="text-2xl font-['Pacifico'] gradient-text"
+          >Jovid</a
+        >
+
+        <!-- Desktop Navigation -->
+        <ul class="hidden md:flex space-x-8">
+          <li>
+            <a
+              href="#about"
+              class="nav-link text-white/70 hover:text-white transition-colors"
+              >About</a
+            >
+          </li>
+          <li>
+            <a
+              href="#skills"
+              class="nav-link text-white/70 hover:text-white transition-colors"
+              >Skills</a
+            >
+          </li>
+          <li>
+            <a
+              href="#projects"
+              class="nav-link text-white/70 hover:text-white transition-colors"
+              >Projects</a
+            >
+          </li>
+          <li>
+            <a
+              href="#experience"
+              class="nav-link text-white/70 hover:text-white transition-colors"
+              >Experience</a
+            >
+          </li>
+          <li>
+            <a
+              href="#contact"
+              class="nav-link text-white/70 hover:text-white transition-colors"
+              >Contact</a
+            >
+          </li>
+        </ul>
+
+        <!-- Mobile Menu Button -->
+        <button
+          id="mobile-menu-button"
+          class="md:hidden w-10 h-10 flex items-center justify-center text-white"
+        >
+          <i class="ri-menu-line ri-lg"></i>
+        </button>
+      </nav>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div
+      id="mobile-menu"
+      class="mobile-menu fixed top-0 right-0 bottom-0 w-64 z-50 glass-card"
+    >
+      <div class="p-6">
+        <div class="flex justify-between items-center mb-8">
+          <span class="text-xl font-['Pacifico'] gradient-text">Menu</span>
+          <button
+            id="close-menu-button"
+            class="w-10 h-10 flex items-center justify-center text-white"
+          >
+            <i class="ri-close-line ri-lg"></i>
+          </button>
+        </div>
+        <ul class="space-y-6">
+          <li>
+            <a
+              href="#about"
+              class="mobile-nav-link block text-white/70 hover:text-white transition-colors"
+              >About</a
+            >
+          </li>
+          <li>
+            <a
+              href="#skills"
+              class="mobile-nav-link block text-white/70 hover:text-white transition-colors"
+              >Skills</a
+            >
+          </li>
+          <li>
+            <a
+              href="#projects"
+              class="mobile-nav-link block text-white/70 hover:text-white transition-colors"
+              >Projects</a
+            >
+          </li>
+          <li>
+            <a
+              href="#experience"
+              class="mobile-nav-link block text-white/70 hover:text-white transition-colors"
+              >Experience</a
+            >
+          </li>
+          <li>
+            <a
+              href="#contact"
+              class="mobile-nav-link block text-white/70 hover:text-white transition-colors"
+              >Contact</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section
+      id="hero"
+      class="min-h-screen flex items-center justify-center relative overflow-hidden pt-16"
+    >
+      <div class="absolute inset-0 bg-[#121212]">
+        <div
+          class="absolute inset-0 opacity-20"
+          style="background: radial-gradient(circle at 50% 50%, rgba(109, 40, 217, 0.4) 0%, transparent 70%)"
+        ></div>
+        <div class="absolute top-0 left-0 w-full h-full">
+          <svg
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+            class="w-full h-full"
+          >
+            <path
+              fill="rgba(109, 40, 217, 0.05)"
+              d="M0,0 L100,0 L100,20 Q50,40 0,20 Z"
+            ></path>
+            <path
+              fill="rgba(79, 70, 229, 0.05)"
+              d="M0,100 L100,100 L100,80 Q50,60 0,80 Z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+
+      <div class="container mx-auto px-6 z-10 animate-on-scroll visible">
+        <div class="text-center max-w-3xl mx-auto">
+          <h1 class="text-5xl md:text-7xl font-bold mb-6">
+            <span class="gradient-text">Jovid Jumaev</span>
+          </h1>
+          <div class="h-12 overflow-hidden mb-6">
+            <div id="typing-text" class="text-2xl md:text-3xl font-light">
+              Data Scientist
+            </div>
+          </div>
+          <p class="text-white/70 text-lg md:text-xl mb-8">
+            Bridging machine learning, analytics, and real-world applications to drive intelligent decision-making
+          </p>
+          <div class="flex flex-col sm:flex-row justify-center gap-4 mb-12">
+            <a
+              href="#projects"
+              class="px-8 py-3 bg-primary hover:bg-opacity-90 text-white font-medium !rounded-button transition-all duration-300 glow-on-hover whitespace-nowrap"
+            >
+              View My Work
+            </a>
+            <a
+              href="#contact"
+              class="px-8 py-3 bg-transparent border border-white/20 hover:border-white/40 text-white font-medium !rounded-button transition-all duration-300 whitespace-nowrap"
+            >
+              Contact Me
+            </a>
+          </div>
+          <div class="flex justify-center items-center gap-40">
+            <a
+              href="https://github.com/jovidjumaev"
+              class="w-10 h-10 flex items-center justify-center text-white/70 hover:text-white transition-colors"
+            >
+              <i class="ri-github-fill ri-lg"></i>
+            </a>
+            <a
+              href="https://linkedin.com/in/jovid-jumaev-967751291"
+              class="w-10 h-10 flex items-center justify-center text-white/70 hover:text-white transition-colors"
+            >
+              <i class="ri-linkedin-fill ri-lg"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce"
+      >
+        <a
+          href="#about"
+          class="w-10 h-10 flex items-center justify-center text-white/70 hover:text-white transition-colors"
+        >
+          <i class="ri-arrow-down-line ri-lg"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 md:py-32 bg-[#0f0f0f]">
+      <div class="container mx-auto px-6">
+        <h2
+          class="text-3xl md:text-4xl font-bold mb-16 text-center animate-on-scroll"
+        >
+          About <span class="gradient-text">Me</span>
+        </h2>
+
+        <div class="flex flex-col md:flex-row gap-12 items-center">
+          <div class="md:w-2/5 animate-on-scroll">
+            <div class="relative">
+              <div
+                class="absolute inset-0 bg-gradient-to-br from-primary to-secondary opacity-20 rounded-2xl transform rotate-6"
+              ></div>
+              <div
+                class="relative overflow-hidden rounded-2xl border border-white/10"
+              >
+                <img
+                  src="/images/mynewphoto.png"
+                  alt="Jovid Jumaev"
+                  class="w-full h-auto object-cover max-w-[1000px] max-h-[1500px] rounded-lg"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="md:w-3/5 animate-on-scroll">
+            <h3 class="text-2xl font-bold mb-4">
+              AI Engineer Intern & Software Engineering Enthusiast
+            </h3>
+            <p class="text-white/70 mb-6 leading-relaxed">
+              Hello! I'm Jovid, a senior at Furman University, majoring in Computer Science and 
+              minoring in Data Analytics. I am originally from Khorog, Tajikistan, and have past internship experiences like interning at Simsys Global
+              based in Seoul, South Korea. I am interested in AI, data analysis, machine learning, and creating 
+              interactive visualizations. I also have experience working with Databases, Frontend, and MCP Servers. 
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <div>
+                <p class="font-medium mb-1">Name:</p>
+                <p class="text-white/70">Jovid Jumaev</p>
+              </div>
+              <div>
+                <p class="font-medium mb-1">Email:</p>
+                <p class="text-white/70">jovid.jumaev01@gmail.com</p>
+              </div>
+              <div>
+                <p class="font-medium mb-1">Location:</p>
+                <p class="text-white/70">Greenville, SC</p>
+              </div>
+              <div>
+                <p class="font-medium mb-1">Education:</p>
+                <p class="text-white/70">Furman University</p>
+              </div>
+            </div>
+
+            <a
+              href="images/final_resume.pdf"
+              download="final_resume.pdf"
+              class="inline-flex items-center px-8 py-3 bg-primary hover:bg-opacity-90 text-white font-medium !rounded-button transition-all duration-300 glow-on-hover whitespace-nowrap mt-6"
+            >
+              <span>Download CV</span>
+              <i class="ri-download-line ri-lg ml-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 md:py-32 bg-[#121212]">
+      <div class="container mx-auto px-6">
+        <h2
+          class="text-3xl md:text-4xl font-bold mb-16 text-center animate-on-scroll"
+        >
+          My <span class="gradient-text">Skills</span>
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div class="animate-on-scroll">
+            <h3 class="text-2xl font-bold mb-8">Technical Skills</h3>
+
+            <div class="space-y-6">
+              <div>
+                <div class="flex justify-between mb-2">
+                  <span>Python</span>
+                  <span>65%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="65"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between mb-2">
+                  <span>Data Analysis</span>
+                  <span>60%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="60"></div>
+                </div>
+              </div>
+
+
+              <div>
+                <div class="flex justify-between mb-2">
+                  <span>SQL</span>
+                  <span>70%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="70"></div>
+                </div>
+              </div>
+              
+
+              <div>
+                <div class="flex justify-between mb-2">
+                  <span>GitHub</span>
+                  <span>70%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="60"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between mb-2">
+                  <span>GIS</span>
+                  <span>70%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="70"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between mb-2">
+                  <span>HTML/CSS</span>
+                  <span>45%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="45"></div>
+                </div>
+              </div>
+            
+           
+
+              <div>
+                <div class="flex justify-between mb-2">
+                  <span>AI Engineer</span>
+                  <span>75%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="75"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="animate-on-scroll">
+            <h3 class="text-2xl font-bold mb-8">Tools</h3>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-6">
+              <div class="glass-card p-6 rounded-lg text-center">
+                <div
+                  class="w-12 h-12 flex items-center justify-center mx-auto mb-4 text-primary"
+                >
+                  <i class="ri-code-box-line ri-2x"></i>
+                </div>
+                <h4 class="font-medium">Cursor</h4>
+              </div>
+
+              <div class="glass-card p-6 rounded-lg text-center">
+                <div
+                  class="w-12 h-12 flex items-center justify-center mx-auto mb-4 text-primary"
+                >
+                  <i class="ri-git-branch-line ri-2x"></i>
+                </div>
+                <h4 class="font-medium">Git</h4>
+              </div>
+
+              <div class="glass-card p-6 rounded-lg text-center">
+                <div
+                  class="w-12 h-12 flex items-center justify-center mx-auto mb-4 text-primary"
+                >
+                  <i class="ri-terminal-box-line ri-2x"></i>
+                </div>
+                <h4 class="font-medium">CLI</h4>
+              </div>
+
+  
+
+              <div class="glass-card p-6 rounded-lg text-center">
+                <div
+                  class="w-12 h-12 flex items-center justify-center mx-auto mb-4 text-primary"
+                >
+                  <i class="ri-map-pin-line ri-2x"></i>
+                </div>
+                <h4 class="font-medium">ArcGIS/QGIS Pro</h4>
+              </div>
+
+
+              <div class="glass-card p-6 rounded-lg text-center">
+                <div
+                  class="w-12 h-12 flex items-center justify-center mx-auto mb-4 text-primary"
+                >
+                  <i class="ri-robot-line ri-2x"></i>
+                </div>
+                <h4 class="font-medium">Claude Desktop</h4>
+              </div>
+
+              <div class="glass-card p-6 rounded-lg text-center">
+                <div
+                  class="w-12 h-12 flex items-center justify-center mx-auto mb-4 text-primary"
+                >
+                  <i class="ri-database-2-line ri-2x"></i>
+                </div>
+                <h4 class="font-medium">Oracle</h4>
+              </div>
+
+              <div class="glass-card p-6 rounded-lg text-center">
+                <div
+                  class="w-12 h-12 flex items-center justify-center mx-auto mb-4 text-primary"
+                >
+                  <i class="ri-docker-line ri-2x"></i>
+                </div>
+                <h4 class="font-medium">Docker</h4>
+              </div>
+
+              <div class="glass-card p-6 rounded-lg text-center">
+                <div
+                  class="w-12 h-12 flex items-center justify-center mx-auto mb-4 text-primary"
+                >
+                  <i class="ri-slack-fill ri-2x"></i>
+                </div>
+                <h4 class="font-medium">Slack</h4>
+              </div>
+
+              <div class="glass-card p-6 rounded-lg text-center">
+                <div
+                  class="w-12 h-12 flex items-center justify-center mx-auto mb-4 text-primary"
+                >
+                  <i class="ri-visual-studio-line ri-2x"></i>
+                </div>
+                <h4 class="font-medium">VS Code</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 md:py-32 bg-[#0f0f0f]">
+      <div class="container mx-auto px-6">
+        <h2
+          class="text-3xl md:text-4xl font-bold mb-6 text-center animate-on-scroll"
+        >
+          My <span class="gradient-text">Projects</span>
+        </h2>
+        <p
+          class="text-white/70 text-center max-w-2xl mx-auto mb-16 animate-on-scroll"
+        >
+          Here are some of my recent projects that showcase my skills and
+          expertise in Data Analysis, AI Engineering, and GIS.
+        </p>
+
+        <div
+          class="flex justify-center mb-12 overflow-x-auto pb-4 animate-on-scroll"
+        >
+          <div class="inline-flex bg-[#1a1a1a] p-1 rounded-full">
+            <button
+              class="project-filter-btn active px-6 py-2 rounded-full bg-primary text-white whitespace-nowrap"
+              data-filter="all"
+            >
+              All
+            </button>
+            <button
+              class="project-filter-btn px-6 py-2 rounded-full text-white/70 hover:text-white whitespace-nowrap"
+              data-filter="Data Analysis"
+            >
+              Data Analysis
+            </button>
+            <button
+              class="project-filter-btn px-6 py-2 rounded-full text-white/70 hover:text-white whitespace-nowrap"
+              data-filter="GIS"
+            >
+              GIS
+            </button>
+            <button
+              class="project-filter-btn px-6 py-2 rounded-full text-white/70 hover:text-white whitespace-nowrap"
+              data-filter="Web Apps"
+            >
+              Web Apps
+            </button>
+            <button
+              class="project-filter-btn px-6 py-2 rounded-full text-white/70 hover:text-white whitespace-nowrap"
+              data-filter="Desktop"
+            >
+              Desktop Apps
+            </button>
+            <button
+              class="project-filter-btn px-6 py-2 rounded-full text-white/70 hover:text-white whitespace-nowrap"
+              data-filter="API"
+            >
+              API
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+          <!-- Project 6: FSAS -->
+          <div
+            class="project-card tilt-card animate-on-scroll"
+            data-category="Web Apps Data Analysis"
+          >
+            <div
+              class="glass-card rounded-lg overflow-hidden h-full flex flex-col"
+            >
+              <div class="relative overflow-hidden">
+                <img
+                  src="images/fsas.png"
+                  alt="FSAS - Furman Student Attendance System"
+                  class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110"
+                />
+                <div
+                  class="absolute top-4 right-4 bg-primary text-white text-xs font-medium px-2 py-1 rounded"
+                >
+                  Web App
+                </div>
+              </div>
+              <div class="p-6 flex-grow">
+                <h3 class="text-xl font-bold mb-2">FSAS - Furman Student Attendance System</h3>
+                <p class="text-white/70 mb-4">
+                  A comprehensive attendance tracking system for Furman University with QR code scanning, 
+                  real-time updates via WebSocket, professor analytics dashboard, student portal, and GPT-4O AI integration. 
+                  Features role-based authentication, geofencing support, and mobile-responsive design.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                  <span
+                    class="text-xs bg-[#2d2d2d] text-white/70 px-3 py-1 rounded-full"
+                    >Next.js</span
+                  >
+                  <span
+                    class="text-xs bg-[#2d2d2d] text-white/70 px-3 py-1 rounded-full"
+                    >Express.js</span
+                  >
+                  <span
+                    class="text-xs bg-[#2d2d2d] text-white/70 px-3 py-1 rounded-full"
+                    >TypeScript</span
+                  >
+                  <span
+                    class="text-xs bg-[#2d2d2d] text-white/70 px-3 py-1 rounded-full"
+                    >Supabase</span
+                  >
+                  <span
+                    class="text-xs bg-[#2d2d2d] text-white/70 px-3 py-1 rounded-full"
+                    >Socket.io</span
+                  >
+                  <span
+                    class="text-xs bg-[#2d2d2d] text-white/70 px-3 py-1 rounded-full"
+                    >GPT-4O API</span
+                  >
+                  <span
+                    class="text-xs bg-[#2d2d2d] text-white/70 px-3 py-1 rounded-full"
+                    >Tailwind CSS</span
+                  >
+                </div>
+              </div>
+              <div class="p-6 pt-0 mt-auto">
+                <div class="flex space-x-3">
+                  <button
+                    class="view-project-btn flex-1 px-4 py-2 bg-[#2d2d2d] hover:bg-[#3d3d3d] text-white text-sm font-medium !rounded-button transition-colors whitespace-nowrap"
+                    data-project="project6"
+                  >
+                    View Details
+                  </button>
+                  <a
+                    href="https://github.com/jovidjumaev/fsas"
+                    target="_blank"
+                    class="w-10 h-10 flex items-center justify-center bg-[#2d2d2d] hover:bg-[#3d3d3d] text-white !rounded-button transition-colors"
+                  >
+                    <i class="ri-github-line"></i>
+                  </a>
+                  <a
+                    href="https://fsas-frontend.vercel.app"
+                    target="_blank"
+                    class="w-10 h-10 flex items-center justify-center bg-[#2d2d2d] hover:bg-[#3d3d3d] text-white !rounded-button transition-colors"
+                  >
+                    <i class="ri-external-link-line"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 1 -->
+          <div
+            class="project-card tilt-card animate-on-scroll"
+            data-category="Web Apps Desktop"
+          >
+            <div
+              class="glass-card rounded-lg overflow-hidden h-full flex flex-col"
+            >
+              <div class="relative overflow-hidden">
+                <img
+                  src="images/scriptify.png"
+                  alt="Scriptify - AI Audio Transcription"
+                  class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110"
+                />
+                <div
+                  class="absolute top-4 right-4 bg-secondary text-white text-xs font-medium px-2 py-1 rounded"
+                >
+                  Desktop App
+                </div>
+              </div>
+              <div class="p-6 flex-grow">
+                <h3 class="text-xl font-bold mb-2">Scriptify - AI Audio Transcription</h3>
+                <p class="text-white/70 mb-4">
+                  A modern, open-source desktop application for high-quality audio transcription using Whisper AI. 
+                  Built during my internship in Seoul to transcribe Korean meetings, supporting English and Korean languages.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                  <span
+                    class="text-xs bg-[#2d2d2d] text-white/70 px-3 py-1 rounded-full"
+                    >TypeScript</span
+                  >
+                  <span
+                    class="text-xs bg-[#2d2d2d] text-white/70 px-3 py-1 rounded-full"
+                    >React</span
+                  >
+                  <span
+                    class="text-xs bg-[#2d2d2d] text-white/70 px-3 py-1 rounded-full"
+                    >Tauri</span
+                  >
+                  <span
+                    class="text-xs bg-[#2d2d2d] text-white/70 px-3 py-1 rounded-full"
+                    >Rust</span
+                  >
+                  <span
+                    class="text-xs bg-[#2d2d2d] text-white/70 px-3 py-1 rounded-full"
+                    >Whisper AI</span
+                  >
+                </div>
+              </div>
+              <div class="p-6 pt-0 mt-auto">
+                <div class="flex space-x-3">
+                  <button
+                    class="view-project-btn flex-1 px-4 py-2 bg-[#2d2d2d] hover:bg-[#3d3d3d] text-white text-sm font-medium !rounded-button transition-colors whitespace-nowrap"
+                    data-project="project4"
+                  >
+                    View Details
+                  </button>
+                  <a
+                    href="https://github.com/jovidjumaev/Scriptify"
+                    target="_blank"
+                    class="w-10 h-10 flex items-center justify-center bg-[#2d2d2d] hover:bg-[#3d3d3d] text-white !rounded-button transition-colors"
+                  >
+                    <i class="ri-github-line"></i>
+                  </a>
+                  <a
+                    href="https://github.com/jovidjumaev/Scriptify"
+                    target="_blank"
+                    class="w-10 h-10 flex items-center justify-center bg-[#2d2d2d] hover:bg-[#3d3d3d] text-white !rounded-button transition-colors"
+                  >
+                    <i class="ri-external-link-line"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2: FloorPlanTo3D-API -->
+          <div
+            class="project-card tilt-card animate-on-scroll"
+            data-category="Web Apps API"
+          >
+            <div
+              class="glass-card rounded-lg overflow-hidden h-full flex flex-col"
+            >
+              <div class="relative overflow-hidden">
+                <img
+                  src="images/vis1.png"
+                  alt="FloorPlanTo3D-API"
+                  class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110"
+                />
+                <div
+                  class="absolute top-4 right-4 bg-primary text-white text-xs font-medium px-2 py-1 rounded"
+                >
+                  API
+                </div>
+              </div>
+              <div class="p-6 flex-grow">
+                <h3 class="text-xl font-bold mb-2">FloorPlanTo3D-API</h3>
+                <p class="text-white/70 mb-4">
+                  A specialized API service for wall, window, and door segmentation from 2D floor plans with OCR capabilities. 
+                  Built during my internship at Simsys Global, this project was adapted from an existing 
+                  3D conversion tool to focus specifically on architectural element detection, segmentation, and text recognition.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                  <span
+                    class="text-xs bg-[#2d2d2d] text-white/70 px-3 py-1 rounded-full"
+                    >Python</span
+                  >
+                  <span
+                    class="text-xs bg-[#2d2d2d] text-white/70 px-3 py-1 rounded-full"
+                    >FastAPI</span
+                  >
+                  <span
+                    class="text-xs bg-[#2d2d2d] text-white/70 px-3 py-1 rounded-full"
+                    >Computer Vision</span
+                  >
+                  <span
+                    class="text-xs bg-[#2d2d2d] text-white/70 px-3 py-1 rounded-full"
+                    >Image Segmentation</span
+                  >
+                  <span
+                    class="text-xs bg-[#2d2d2d] text-white/70 px-3 py-1 rounded-full"
+                    >REST API</span
+                  >
+                  <span
+                    class="text-xs bg-[#2d2d2d] text-white/70 px-3 py-1 rounded-full"
+                    >Simsys</span
+                  >
+                </div>
+              </div>
+              <div class="p-6 pt-0 mt-auto">
+                <div class="flex space-x-3">
+                  <button
+                    class="view-project-btn flex-1 px-4 py-2 bg-[#2d2d2d] hover:bg-[#3d3d3d] text-white text-sm font-medium !rounded-button transition-colors whitespace-nowrap"
+                    data-project="project5"
+                  >
+                    View Details
+                  </button>
+                  <a
+                    href="https://github.com/jovidjumaev/FloorPlanTo3D-API---Simsys"
+                    target="_blank"
+                    class="w-10 h-10 flex items-center justify-center bg-[#2d2d2d] hover:bg-[#3d3d3d] text-white !rounded-button transition-colors"
+                  >
+                    <i class="ri-github-line"></i>
+                  </a>
+                  <a
+                    href="https://github.com/jovidjumaev/FloorPlanTo3D-API---Simsys"
+                    target="_blank"
+                    class="w-10 h-10 flex items-center justify-center bg-[#2d2d2d] hover:bg-[#3d3d3d] text-white !rounded-button transition-colors"
+                  >
+                    <i class="ri-external-link-line"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 3 -->
+          <div
+            class="project-card tilt-card animate-on-scroll"
+            data-category="Data Analysis Web Apps"
+          >
+            <div
+              class="glass-card rounded-lg overflow-hidden h-full flex flex-col"
+            >
+              <div class="relative overflow-hidden">
+                <img
+                  src="https://readdy.ai/api/search-image?query=modern%20dashboard%20UI%20with%20dark%20theme%2C%20data%20visualization%2C%20analytics%20charts%2C%20minimal%20design%2C%20high%20quality%20render%2C%20professional%20UI%20design&width=600&height=400&seq=2&orientation=landscape"
+                  alt="La Liga Analytics Dashboard"
+                  class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110"
+                />
+                <div
+                  class="absolute top-4 right-4 bg-primary text-white text-xs font-medium px-2 py-1 rounded"
+                >
+                  Web App
+                </div>
+              </div>
+              <div class="p-6 flex-grow">
+                <h3 class="text-xl font-bold mb-2">La Liga Analytics Dashboard</h3>
+                <p class="text-white/70 mb-4">
+                  A personal window into the world of La Liga. It's not just another sports website, 
+                  it's a living, breathing dashboard that keeps you updated with the latest happenings in Spanish football.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                  <span
+                    class="text-xs bg-[#2d2d2d] text-white/70 px-3 py-1 rounded-full"
+                    >Python</span
+                  >
+                  <span
+                    class="text-xs bg-[#2d2d2d] text-white/70 px-3 py-1 rounded-full"
+                    >StreamLit</span
+                  >
+                  <span
+                    class="text-xs bg-[#2d2d2d] text-white/70 px-3 py-1 rounded-full"
+                    >Cursor</span
+                  >
+                </div>
+              </div>
+              <div class="p-6 pt-0 mt-auto">
+                <div class="flex space-x-3">
+                  <button
+                    class="view-project-btn flex-1 px-4 py-2 bg-[#2d2d2d] hover:bg-[#3d3d3d] text-white text-sm font-medium !rounded-button transition-colors whitespace-nowrap"
+                    data-project="project1"
+                  >
+                    View Details
+                  </button>
+                  <a
+                    href="https://github.com/jovidjumaev/la-liga-insight"
+                    class="w-10 h-10 flex items-center justify-center bg-[#2d2d2d] hover:bg-[#3d3d3d] text-white !rounded-button transition-colors"
+                  >
+                    <i class="ri-github-line"></i>
+                  </a>
+                  <a
+                    href="#"
+                    class="w-10 h-10 flex items-center justify-center bg-[#2d2d2d] hover:bg-[#3d3d3d] text-white !rounded-button transition-colors"
+                  >
+                    <i class="ri-external-link-line"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Project 4 -->
+          <div
+            class="project-card tilt-card animate-on-scroll"
+            data-category="Data Analysis GIS"
+          >
+            <div
+              class="glass-card rounded-lg overflow-hidden h-full flex flex-col"
+            >
+              <div class="relative overflow-hidden">
+                <img
+                  src="/images/traffic accidents.png"
+                  alt="GIS Project"
+                  class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110"
+                />
+                <div
+                  class="absolute top-4 right-4 bg-secondary text-white text-xs font-medium px-2 py-1 rounded"
+                >
+                  GIS
+                </div>
+              </div>
+              <div class="p-6 flex-grow">
+                <h3 class="text-xl font-bold mb-2">Greenville County Traffic Accident Analysis</h3>
+                <p class="text-white/70 mb-4">
+                  A detailed analysis of traffic accident patterns in Greenville County 
+                  by examining factors such as injuries, fatalities, and road conditions. 
+                  Using Python and ArcGIS, I visualized these insights to contribute to 
+                  improved road safety and awareness.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                  <span
+                    class="text-xs bg-[#2d2d2d] text-white/70 px-3 py-1 rounded-full"
+                    >Python</span
+                  >
+                  <span
+                    class="text-xs bg-[#2d2d2d] text-white/70 px-3 py-1 rounded-full"
+                    >ArcGIS Pro</span
+                  >
+                  <span
+                    class="text-xs bg-[#2d2d2d] text-white/70 px-3 py-1 rounded-full"
+                    >QGIS</span
+                  >
+                </div>
+              </div>
+              <div class="p-6 pt-0 mt-auto">
+                <div class="flex space-x-3">
+                  <button
+                    class="view-project-btn flex-1 px-4 py-2 bg-[#2d2d2d] hover:bg-[#3d3d3d] text-white text-sm font-medium !rounded-button transition-colors whitespace-nowrap"
+                    data-project="project2"
+                  >
+                    View Details
+                  </button>
+                  <a
+                    href="#"
+                    class="w-10 h-10 flex items-center justify-center bg-[#2d2d2d] hover:bg-[#3d3d3d] text-white !rounded-button transition-colors"
+                  >
+                    <i class="ri-github-line"></i>
+                  </a>
+                  <a
+                    href="#"
+                    class="w-10 h-10 flex items-center justify-center bg-[#2d2d2d] hover:bg-[#3d3d3d] text-white !rounded-button transition-colors"
+                  >
+                    <i class="ri-external-link-line"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 5 -->
+          <div
+            class="project-card tilt-card animate-on-scroll"
+            data-category="Data Analysis"
+          >
+            <div
+              class="glass-card rounded-lg overflow-hidden h-full flex flex-col"
+            >
+              <div class="relative overflow-hidden">
+                <img
+                  src="images/project2.jpg"
+                  alt="Stock Market Analysis"
+                  class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110"
+                />
+                <div
+                  class="absolute top-4 right-4 bg-primary text-white text-xs font-medium px-2 py-1 rounded"
+                >
+                  Data Analysis
+                </div>
+              </div>
+              <div class="p-6 flex-grow">
+                <h3 class="text-xl font-bold mb-2">Stock Market Analysis</h3>
+                <p class="text-white/70 mb-4">
+                  An analysis of daily stock data from the S&P 500 using models like k-NN, 
+                  Savitzky-Golay Filter, Random Classifiers, and LSTM Networks, with 
+                  the use of Python for data preprocessing and technical indicator computation, 
+                  to predict stock price movements with a focus on accuracy
+                   and variance explanation.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                  <span
+                    class="text-xs bg-[#2d2d2d] text-white/70 px-3 py-1 rounded-full"
+                    >Python</span
+                  >
+                  <span
+                    class="text-xs bg-[#2d2d2d] text-white/70 px-3 py-1 rounded-full"
+                    >K-NN</span
+                  >
+                  <span
+                    class="text-xs bg-[#2d2d2d] text-white/70 px-3 py-1 rounded-full"
+                    >Stock Market</span
+                  >
+                </div>
+              </div>
+              <div class="p-6 pt-0 mt-auto">
+                <div class="flex space-x-3">
+                  <button
+                    class="view-project-btn flex-1 px-4 py-2 bg-[#2d2d2d] hover:bg-[#3d3d3d] text-white text-sm font-medium !rounded-button transition-colors whitespace-nowrap"
+                    data-project="project3"
+                  >
+                    View Details
+                  </button>
+                  <a
+                    href="#"
+                    class="w-10 h-10 flex items-center justify-center bg-[#2d2d2d] hover:bg-[#3d3d3d] text-white !rounded-button transition-colors"
+                  >
+                    <i class="ri-github-line"></i>
+                  </a>
+                  <a
+                    href="#"
+                    class="w-10 h-10 flex items-center justify-center bg-[#2d2d2d] hover:bg-[#3d3d3d] text-white !rounded-button transition-colors"
+                  >
+                    <i class="ri-external-link-line"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        
+    </section> 
+    <!-- Project Modal -->
+    <div
+      id="project-modal"
+      class="project-modal fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80"
+    >
+      <div
+        class="glass-card rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+      >
+        <div class="p-6 relative">
+          <button
+            id="close-modal-button"
+            class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center text-white/70 hover:text-white transition-colors"
+          >
+            <i class="ri-close-line ri-lg"></i>
+          </button>
+
+          <div id="modal-content">
+            <!-- Content will be dynamically inserted here -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 md:py-32 bg-[#121212]">
+      <div class="container mx-auto px-6">
+        <h2
+          class="text-3xl md:text-4xl font-bold mb-16 text-center animate-on-scroll"
+        >
+          Work <span class="gradient-text">Experience</span>
+        </h2>
+
+        <div class="max-w-3xl mx-auto">
+          <!-- Experience 1 -->
+          <div class="timeline-item pb-12 animate-on-scroll">
+            <div class="timeline-dot" style="top: 6px;"></div>
+            <div class="timeline-date mb-2">Summer 2025</div>
+            <h3 class="text-xl font-bold mb-2">AI Engineer Intern</h3>
+            <h4 class="text-primary mb-2">Simsys Global</h4>
+            <p class="text-primary mb-4 flex items-center">
+              <i class="ri-map-pin-line mr-2"></i>
+              Seoul, South Korea
+            </p>
+            <p class="text-white/70 mb-4">
+              Working as an intern on AI projects, 
+              focusing on creating efficient solutions and improving data processing workflows.
+            </p>
+            <ul class="text-white/70 space-y-2">
+              <li class="flex items-start">
+                <i class="ri-check-line text-primary mt-1 mr-2"></i>
+                <span
+                  >Developed an AI Model that automates the process of extranting wall, window and door, space segmentation using OCR from 2D floor plan image</span
+                >
+              </li>
+              <li class="flex items-start">
+                <i class="ri-check-line text-primary mt-1 mr-2"></i>
+                <span>Impelented an Emergency Wayfinding Algorithm to facilitate quick exit during emergency situations in the client's building, taking advantage of Buildoc, Yolo and Otology technologies</span>
+              </li>
+              <li class="flex items-start">
+                <i class="ri-check-line text-primary mt-1 mr-2"></i>
+                <span
+                  >Implemented an MCP Server connecting Simsys's Product to Claude Desktop</span
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Experience 2 -->
+          <div class="timeline-item pb-12 animate-on-scroll">
+            <div class="timeline-dot" style="top: 6px;"></div>
+            <div class="timeline-date mb-2">2022-2025</div>
+            <h3 class="text-xl font-bold mb-2">IT Student Desk Staff</h3>
+            <h4 class="text-primary mb-2">Furman University</h4>
+            <p class="text-primary mb-4 flex items-center">
+              <i class="ri-map-pin-line mr-2"></i>
+              Greenville, South Carolina
+            </p>
+      
+            <ul class="text-white/70 space-y-2">
+              <li class="flex items-start">
+                <i class="ri-check-line text-primary mt-1 mr-2"></i>
+                <span>Resolved 200+ tech (software, hardware, network) issues, reducing average downtime by 30% using Team Dynamix</span>
+              </li>
+              <li class="flex items-start">
+                <i class="ri-check-line text-primary mt-1 mr-2"></i>
+                <span
+                  >Configured and secured 450+ devices, ensuring seamless Wi-Fi, antivirus, and network setup for new students
+                  </span
+                >
+              </li>
+              <li class="flex items-start">
+                <i class="ri-check-line text-primary mt-1 mr-2"></i>
+                <span>Improved vulnerability scan efficiency by 25% using Python scripts to automate report generation and data analysis</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Experience 3 -->
+          <div class="timeline-item pb-12 animate-on-scroll">
+            <div class="timeline-dot" style="top: 6px;"></div>
+            <div class="timeline-date mb-2">2021 - 2022</div>
+            <h3 class="text-xl font-bold mb-2">Data Scientist in Finance</h3>
+            <h4 class="text-primary mb-2">Behruz and Partners LLC</h4>
+            <p class="text-primary mb-4 flex items-center">
+              <i class="ri-map-pin-line mr-2"></i>
+              Dushanbe, Tajikistan
+            </p>
+            <ul class="text-white/70 space-y-2">
+              <li class="flex items-start">
+                <i class="ri-check-line text-primary mt-1 mr-2"></i>
+                <span>
+                Analyzed financial data for 5 startups, boosting returns by 12% through cost cuts and market expansion
+              </span>
+              </li>
+              <li class="flex items-start">
+                <i class="ri-check-line text-primary mt-1 mr-2"></i>
+                <span
+                  > Managed and optimized 500+ financial records, improving data accuracy by 15%, reducing reporting time by 20%
+                  </span</span
+                >
+              </li>
+              <li class="flex items-start">
+                <i class="ri-check-line text-primary mt-1 mr-2"></i>
+                <span>Utilized Python and Excel for ad hoc analysis for 20+ datasets, recommending expense reduction for risk management
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Education -->
+          <h2 class="text-2xl font-bold mb-8 mt-16 animate-on-scroll">
+            Education
+          </h2>
+
+          <div class="timeline-item pb-12 animate-on-scroll">
+            <div class="timeline-dot" style="top: 6px;"></div>
+            <div class="timeline-date mb-2">2022 - 2026</div>
+            <h3 class="text-xl font-bold mb-2">
+              Bachelor of Science in Computer Science and Data Analytics
+            </h3>
+            <h4 class="text-primary mb-2">Furman University</h4>
+            <p class="text-primary mb-4 flex items-center">
+              <i class="ri-map-pin-line mr-2"></i>
+              Greenville, South Carolina
+            </p>
+            <p class="text-white/70">
+              Rising Senior with a GPA of 3.74
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 md:py-32 bg-[#0f0f0f]">
+      <div class="container mx-auto px-6">
+        <h2
+          class="text-3xl md:text-4xl font-bold mb-6 text-center animate-on-scroll"
+        >
+          Get In <span class="gradient-text">Touch</span>
+        </h2>
+        <p
+          class="text-white/70 text-center max-w-2xl mx-auto mb-16 animate-on-scroll"
+        >
+          Have a project in mind or want to collaborate? Feel free to reach out
+          to me using the form below or through my social media channels.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div class="animate-on-scroll">
+            <div class="glass-card p-8 rounded-lg h-full">
+              <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+
+              <div class="space-y-6">
+                <div>
+                  <h4 class="font-medium mb-1">Location</h4>
+                  <p class="text-white/70">Greenville, South Carolina</p>
+                </div>
+                <div>
+                  <h4 class="font-medium mb-1">Email</h4>
+                  <p class="text-white/70">jovid.jumaev01@gmail.com</p>
+                </div>
+                <div>
+                  <h4 class="font-medium mb-1">Education</h4>
+                  <p class="text-white/70">Furman University</p>
+                </div>
+              </div>
+
+              <h3 class="text-xl font-bold mt-12 mb-6">Follow Me</h3>
+              <div class="flex space-x-4">
+                <a
+                  href="https://github.com/jovidjumaev"
+                  class="w-10 h-10 flex items-center justify-center bg-[#2d2d2d] hover:bg-primary text-white rounded-lg transition-colors"
+                >
+                  <i class="ri-github-fill"></i>
+                </a>
+                <a
+                  href="https://linkedin.com/in/jovid-jumaev-967751291"
+                  class="w-10 h-10 flex items-center justify-center bg-[#2d2d2d] hover:bg-primary text-white rounded-lg transition-colors"
+                >
+                  <i class="ri-linkedin-fill"></i>
+                </a>
+                
+                
+              </div>
+            </div>
+          </div>
+
+          <div class="animate-on-scroll">
+            <form id="contact-form" action="https://formsubmit.co/joviidjumaev@gmail.com" method="POST" class="glass-card p-8 rounded-lg">
+              <!-- Enhanced honeypot fields to catch bots -->
+              <input type="text" name="_honey" style="display:none !important; position:absolute !important; left:-9999px !important;">
+              <input type="email" name="_email_confirm" style="display:none !important; position:absolute !important; left:-9999px !important;">
+              <input type="text" name="_website" style="display:none !important; position:absolute !important; left:-9999px !important;">
+              <input type="text" name="_phone" style="display:none !important; position:absolute !important; left:-9999px !important;">
+              
+              <!-- Time-based spam protection -->
+              <input type="hidden" name="_timestamp" id="form-timestamp">
+              <input type="hidden" name="_timezone" id="form-timezone">
+              
+              <!-- Disable captcha -->
+              <input type="hidden" name="_captcha" value="false">
+              
+              <!-- Specify redirect after submission -->
+              <input type="hidden" name="_next" value="https://jovidjumaev.com/thank-you.html">
+              
+              <!-- Custom subject -->
+              <input type="hidden" name="_subject" value="New Contact Form Submission">
+              
+              <!-- Disable auto response -->
+              <input type="hidden" name="_autoresponse" value="Thank you for your message. I will get back to you soon.">
+
+              <!-- Disable FormSubmit branding -->
+              <input type="hidden" name="_template" value="table">
+              <input type="hidden" name="_format" value="html">
+              <input type="hidden" name="_next" value="https://jovidjumaev.com/thank-you.html" data-redirect="true">
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+                <div>
+                  <label for="name" class="block text-sm font-medium mb-2">Your Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    class="w-full px-4 py-3 bg-[#1a1a1a] border border-[#333] rounded focus:border-primary text-white text-sm"
+                    placeholder="John Doe"
+                    required
+                    minlength="2"
+                    maxlength="50"
+                  />
+                </div>
+                <div>
+                  <label for="email" class="block text-sm font-medium mb-2">Your Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    class="w-full px-4 py-3 bg-[#1a1a1a] border border-[#333] rounded focus:border-primary text-white text-sm"
+                    placeholder="john@example.com"
+                    required
+                    maxlength="100"
+                  />
+                </div>
+              </div>
+
+              <div class="mb-6">
+                <label for="subject" class="block text-sm font-medium mb-2">Subject</label>
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  class="w-full px-4 py-3 bg-[#1a1a1a] border border-[#333] rounded focus:border-primary text-white text-sm"
+                  placeholder="Project Inquiry"
+                  required
+                  minlength="5"
+                  maxlength="100"
+                />
+              </div>
+
+              <div class="mb-6">
+                <label for="message" class="block text-sm font-medium mb-2">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="5"
+                  class="w-full px-4 py-3 bg-[#1a1a1a] border border-[#333] rounded focus:border-primary text-white text-sm resize-none"
+                  placeholder="Your message here..."
+                  required
+                  minlength="10"
+                  maxlength="1000"
+                ></textarea>
+                <div class="text-xs text-white/50 mt-1">
+                  <span id="message-counter">0</span>/1000 characters
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                id="submit-btn"
+                class="w-full px-6 py-3 bg-primary hover:bg-opacity-90 text-white font-medium !rounded-button transition-all duration-300 glow-on-hover whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Send Message
+              </button>
+            </form>
+
+            <!-- Success Message -->
+            <div id="success-message" class="hidden mt-4 p-4 bg-green-500/20 border border-green-500/50 rounded-lg text-green-500">
+              Thank you! Your message has been sent. I will get back to you as soon as possible.
+            </div>
+
+            <!-- Error Message -->
+            <div id="error-message" class="hidden mt-4 p-4 bg-red-500/20 border border-red-500/50 rounded-lg text-red-500">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-[#0a0a0a]">
+      <div class="container mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="mb-6 md:mb-0">
+            <a href="#hero" class="text-2xl font-['Pacifico'] gradient-text"
+              >Jovid</a
+            >
+            <p class="text-white/50 mt-2">
+              &copy; 2025 Jovid Jumaev. All rights reserved.
+            </p>
+          </div>
+
+          <ul class="flex space-x-6">
+            <li>
+              <a
+                href="#about"
+                class="text-white/50 hover:text-white transition-colors"
+                >About</a
+              >
+            </li>
+            <li>
+              <a
+                href="#projects"
+                class="text-white/50 hover:text-white transition-colors"
+                >Projects</a
+              >
+            </li>
+            <li>
+              <a
+                href="#experience"
+                class="text-white/50 hover:text-white transition-colors"
+                >Experience</a
+              >
+            </li>
+            <li>
+              <a
+                href="#contact"
+                class="text-white/50 hover:text-white transition-colors"
+                >Contact</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button
+      id="back-to-top"
+      class="fixed bottom-6 right-6 w-12 h-12 flex items-center justify-center bg-primary text-white rounded-full shadow-lg opacity-0 invisible transition-all duration-300 z-30"
+    >
+      <i class="ri-arrow-up-line ri-lg"></i>
+    </button>
+
+    <!-- Loading Screen Script -->
+    <script id="loading-screen-script">
+      document.addEventListener("DOMContentLoaded", function () {
+        const loadingScreen = document.getElementById("loading-screen");
+        const loadingBar = document.getElementById("loading-bar");
+
+        // Simulate loading progress
+        let progress = 0;
+        const interval = setInterval(() => {
+          progress += 5;
+          loadingBar.style.width = `${progress}%`;
+
+          if (progress >= 100) {
+            clearInterval(interval);
+            setTimeout(() => {
+              loadingScreen.style.opacity = "0";
+              setTimeout(() => {
+                loadingScreen.style.display = "none";
+              }, 500);
+            }, 500);
+          }
+        }, 100);
+      });
+    </script>
+
+    <!-- Navigation Script -->
+    <script id="navigation-script">
+      document.addEventListener("DOMContentLoaded", function () {
+        const mobileMenuButton = document.getElementById("mobile-menu-button");
+        const closeMenuButton = document.getElementById("close-menu-button");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
+        const navLinks = document.querySelectorAll(".nav-link");
+        const sections = document.querySelectorAll("section");
+        const backToTopButton = document.getElementById("back-to-top");
+
+        // Mobile menu toggle
+        mobileMenuButton.addEventListener("click", () => {
+          mobileMenu.classList.add("open");
+        });
+
+        closeMenuButton.addEventListener("click", () => {
+          mobileMenu.classList.remove("open");
+        });
+
+        // Close mobile menu when clicking a link
+        mobileNavLinks.forEach((link) => {
+          link.addEventListener("click", () => {
+            mobileMenu.classList.remove("open");
+          });
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            const targetId = this.getAttribute("href");
+            const targetElement = document.querySelector(targetId);
+
+            if (targetElement) {
+              window.scrollTo({
+                top: targetElement.offsetTop - 80,
+                behavior: "smooth",
+              });
+            }
+          });
+        });
+
+        // Highlight active nav link based on scroll position
+        function highlightNavLink() {
+          let scrollPosition = window.scrollY;
+
+          sections.forEach((section) => {
+            const sectionTop = section.offsetTop - 100;
+            const sectionHeight = section.offsetHeight;
+            const sectionId = section.getAttribute("id");
+
+            if (
+              scrollPosition >= sectionTop &&
+              scrollPosition < sectionTop + sectionHeight
+            ) {
+              navLinks.forEach((link) => {
+                link.classList.remove("text-white", "font-medium");
+                link.classList.add("text-white/70");
+
+                if (link.getAttribute("href") === `#${sectionId}`) {
+                  link.classList.remove("text-white/70");
+                  link.classList.add("text-white", "font-medium");
+                }
+              });
+            }
+          });
+
+          // Show/hide back to top button
+          if (scrollPosition > 500) {
+            backToTopButton.classList.remove("opacity-0", "invisible");
+            backToTopButton.classList.add("opacity-100", "visible");
+          } else {
+            backToTopButton.classList.remove("opacity-100", "visible");
+            backToTopButton.classList.add("opacity-0", "invisible");
+          }
+        }
+
+        window.addEventListener("scroll", highlightNavLink);
+
+        // Back to top button
+        backToTopButton.addEventListener("click", () => {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        });
+
+        // Initial call to set active link
+        highlightNavLink();
+      });
+    </script>
+
+    <!-- Typing Animation Script -->
+    <script id="typing-animation-script">
+      document.addEventListener("DOMContentLoaded", function () {
+        const typingElement = document.getElementById("typing-text");
+        const phrases = [
+          "Rising Senior at Furman University",
+          "Summer AI Engineer Intern",
+          "AI and Software Engineering Enthusiast",
+        ];
+
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingSpeed = 100;
+
+        function typeText() {
+          const currentPhrase = phrases[phraseIndex];
+
+          if (isDeleting) {
+            typingElement.textContent = currentPhrase.substring(0, charIndex - 1);
+            charIndex--;
+            typingSpeed = 50;
+          } else {
+            typingElement.textContent = currentPhrase.substring(0, charIndex + 1);
+            charIndex++;
+            typingSpeed = 100;
+          }
+
+          if (!isDeleting && charIndex === currentPhrase.length) {
+            isDeleting = true;
+            typingSpeed = 1500; // Pause at the end
+          } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            phraseIndex = (phraseIndex + 1) % phrases.length;
+            typingSpeed = 500; // Pause before typing next phrase
+          }
+
+          setTimeout(typeText, typingSpeed);
+        }
+
+        // Start typing animation
+        setTimeout(typeText, 1000);
+      });
+    </script>
+
+    <!-- Scroll Animation Script -->
+    <script id="scroll-animation-script">
+      document.addEventListener("DOMContentLoaded", function () {
+        const animatedElements = document.querySelectorAll(".animate-on-scroll");
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+              }
+            });
+          },
+          {
+            threshold: 0.1,
+          },
+        );
+
+        animatedElements.forEach((element) => {
+          observer.observe(element);
+        });
+
+        // Animate skill bars when they come into view
+        const skillBars = document.querySelectorAll(".skill-progress");
+
+        const skillObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const width = entry.target.getAttribute("data-width");
+                entry.target.style.width = `${width}%`;
+              }
+            });
+          },
+          {
+            threshold: 0.1,
+          },
+        );
+
+        skillBars.forEach((bar) => {
+          skillObserver.observe(bar);
+        });
+      });
+    </script>
+
+    <!-- Project Filter Script -->
+    <script id="project-filter-script">
+      document.addEventListener("DOMContentLoaded", function () {
+        const filterButtons = document.querySelectorAll(".project-filter-btn");
+        const projectCards = document.querySelectorAll(".project-card");
+
+        filterButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            // Remove active class from all buttons
+            filterButtons.forEach((btn) => {
+              btn.classList.remove("active", "bg-primary");
+              btn.classList.add("text-white/70");
+            });
+
+            // Add active class to clicked button
+            button.classList.add("active", "bg-primary");
+            button.classList.remove("text-white/70");
+            button.classList.add("text-white");
+
+            const filter = button.getAttribute("data-filter");
+
+            // Show/hide project cards based on filter
+            projectCards.forEach((card) => {
+              if (filter === "all" || card.getAttribute("data-category").includes(filter)) {
+                card.style.display = "block";
+              } else {
+                card.style.display = "none";
+              }
+            });
+          });
+        });
+      });
+    </script>
+
+    <!-- Project Modal Script -->
+    <script id="project-modal-script">
+      document.addEventListener("DOMContentLoaded", function () {
+        const viewButtons = document.querySelectorAll(".view-project-btn");
+        const modal = document.getElementById("project-modal");
+        const closeButton = document.getElementById("close-modal-button");
+        const modalContent = document.getElementById("modal-content");
+
+        // Project details data
+        const projectDetails = {
+          project1: {
+            title: "La Liga Analytics Dashboard",
+            category: "Web Application",
+            client: "Personal Project",
+            date: "June 2025",
+            description:
+              "A personal window into the world of La Liga. It's not just another sports website, it's a living, breathing dashboard that keeps you updated with the latest happenings in Spanish football.",
+            features: [
+              "Interactive dashboard powered by Streamlit",
+              "Real-time updates for the 2024-2025 season",
+              "Comprehensive analysis of the 2023-2024 season",
+              "Team and player performance analytics",
+            ],
+            technologies: ["Python", "StreamLit", "Cursor", "La Liga"],
+            image: "/images/project3.jpg",
+            demoLink: "https://mypersonalprojectbarca.streamlit.app/",
+            codeLink: "https://github.com/jovidjumaev/la-liga-insight"
+          },
+          project2: {
+            title: "Traffic Accident Analysis",
+            category: "GIS",
+            client: "Greenville County",
+            date: "December 2024",
+            description:
+              "A detailed analysis of traffic accident patterns in Greenville County by examining factors such as injuries, fatalities, and road conditions. Using Python and ArcGIS, I visualized these insights to contribute to improved road safety and awareness.",
+            features: [
+              "Spot accident-prone areas using maps and data",
+              "Understand how weather and road conditions impact accident severity.",
+              "Recommend ways to improve traffic safety)",
+              "Hotspots: Woodruff Road, White Horse Road, and Wade Hampton Boulevard topped the list.",
+            ],
+            technologies: ["Python", "ArcGIS Pro", "QGIS"],
+            image: "/images/traffic accidents.png",
+            demoLink: "images/myposter.png",
+            codeLink: "images/myposter.png"
+          },
+          project3: {
+            title: "Stock Market Analysis",
+            category: "Data Analysis",
+            client: "Furman University",
+            date: "December 2024",
+            description:
+              "An analysis of daily stock data from the S&P 500 using models like k-NN, Savitzky-Golay Filter, Random Classifiers, and LSTM Networks, with the use of Python for data preprocessing and technical indicator computation, to predict stock price movements with a focus on accuracy and variance explanation.",
+            features: [
+              "Understand daily market dynamics by analyzing Adj Close price changes and volume trends.",
+              "Classify price changes into Positive, Negative, and Neutral categories for trend analysis.",
+              "Identify the most effective model for predicting price movements",
+            ],
+            technologies: [
+              "Python",
+              "K-NN",
+              "Stock Market",
+            ],
+            image:
+              "/images/project2.jpg",
+            demoLink: "images/stockmarket.png",
+            codeLink: null,
+          },
+          project4: {
+            title: "Scriptify - AI Audio Transcription",
+            category: "Desktop Application",
+            client: "Personal Project",
+            date: "Summer 2025",
+            description:
+              "A modern, open-source desktop application for high-quality audio transcription using Whisper AI. Built during my internship in Seoul to transcribe Korean meetings, supporting English and Korean languages. Features a clean, intuitive interface with drag-and-drop file upload and real-time transcription capabilities.",
+            features: [
+              "High-quality audio transcription using OpenAI's Whisper AI",
+              "Support for English and Korean languages",
+              "Modern desktop interface built with Tauri and React",
+              "Drag-and-drop file upload functionality",
+              "Real-time transcription with progress indicators",
+              "Cross-platform compatibility (Windows, macOS, Linux)",
+            ],
+            technologies: [
+              "TypeScript",
+              "React",
+              "Tauri",
+              "Rust",
+              "Whisper AI",
+              "Vite",
+            ],
+            image:
+              "images/scriptify.png",
+            demoLink: null,
+            codeLink: "https://github.com/jovidjumaev/Scriptify",
+          },
+          project5: {
+            title: "FloorPlanTo3D-API",
+            category: "API Service",
+            client: "Simsys Global",
+            date: "Summer 2025",
+            description:
+              "A specialized API service for wall, window, and door segmentation from 2D floor plans with OCR capabilities. Built during my internship at Simsys Global, this project was adapted from an existing 3D conversion tool to focus specifically on architectural element detection, segmentation, and text recognition. The API processes floor plan images to identify and extract structural components and text elements for comprehensive architectural analysis and planning.",
+            features: [
+              "Wall, window, and door segmentation from 2D floor plans",
+              "OCR (Optical Character Recognition) for text extraction",
+              "Architectural element detection and classification",
+              "RESTful API for floor plan processing",
+              "Image processing and computer vision capabilities",
+              "FastAPI backend with Python",
+              "Integration with Simsys Global systems",
+            ],
+            technologies: [
+              "Python",
+              "FastAPI",
+              "Computer Vision",
+              "Image Segmentation",
+              "OCR",
+              "REST API",
+              "Simsys",
+              "Architectural Analysis",
+            ],
+            image:
+              "images/demo1.png",
+            demoLink: null,
+            codeLink: "https://github.com/jovidjumaev/FloorPlanTo3D-API---Simsys",
+          },
+          project6: {
+            title: "FSAS - Furman Student Attendance System",
+            category: "Web Application",
+            client: "Furman University",
+            date: "2025",
+            description:
+              "A comprehensive attendance tracking system built with Next.js, Express.js, Supabase, and GPT-4O API integration. Features real-time attendance tracking with QR codes, professor analytics dashboard, student portal with attendance history, WebSocket integration for live updates, AI-powered assistance, role-based authentication, and geofencing support for location-based attendance. Fully mobile-responsive with secure JWT authentication.",
+            features: [
+              "Real-time attendance tracking with QR code scanning",
+              "Professor dashboard with analytics and session management",
+              "Student portal with attendance history and class enrollment",
+              "WebSocket integration for live updates",
+              "GPT-4O API integration for AI-powered assistance",
+              "Role-based authentication (Professor/Student)",
+              "Geofencing support for location-based attendance",
+              "Mobile-responsive design",
+              "Secure JWT authentication",
+              "PostgreSQL database with Supabase",
+            ],
+            technologies: [
+              "Next.js",
+              "Express.js",
+              "TypeScript",
+              "Supabase",
+              "Socket.io",
+              "GPT-4O API",
+              "Tailwind CSS",
+              "PostgreSQL",
+              "QR Codes",
+              "Real-time Updates",
+            ],
+            image:
+              "images/fsas2.png",
+            demoLink: "https://fsas-frontend.vercel.app",
+            codeLink: "https://github.com/jovidjumaev/fsas",
+          },
+
+          
+
+        };
+
+        // Open modal with project details
+        viewButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            const projectId = button.getAttribute("data-project");
+            const project = projectDetails[projectId];
+
+            if (project) {
+              // Generate modal content
+              modalContent.innerHTML = `
+                                  <div>
+                                      <img src="${project.image}" alt="${project.title}" class="w-full h-auto rounded-lg mb-6">
+
+                                      <h2 class="text-3xl font-bold mb-2">${project.title}</h2>
+                                      <p class="text-primary mb-6">${project.category}</p>
+
+                                      <p class="text-white/70 mb-8">${project.description}</p>
+
+                                      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                                          <div>
+                                              <h3 class="text-lg font-bold mb-4">Project Details</h3>
+                                              <div class="space-y-3">
+                                                  <div class="flex">
+                                                      <span class="font-medium w-24">Client:</span>
+                                                      <span class="text-white/70">${project.client}</span>
+                                                  </div>
+                                                  <div class="flex">
+                                                      <span class="font-medium w-24">Date:</span>
+                                                      <span class="text-white/70">${project.date}</span>
+                                                  </div>
+                                              </div>
+                                          </div>
+
+                                          <div>
+                                              <h3 class="text-lg font-bold mb-4">Technologies</h3>
+                                              <div class="flex flex-wrap gap-2">
+                                                  ${project.technologies
+                                                    .map(
+                                                      (tech) => `
+                                                      <span class="text-xs bg-[#2d2d2d] text-white/70 px-3 py-1 rounded-full">${tech}</span>
+                                                  `,
+                                                    )
+                                                    .join("")}
+                                              </div>
+                                          </div>
+                                      </div>
+
+                                      <h3 class="text-lg font-bold mb-4">Key Features</h3>
+                                      <ul class="space-y-3 mb-8">
+                                          ${project.features
+                                            .map(
+                                              (feature) => `
+                                              <li class="flex items-start">
+                                                  <i class="ri-check-line text-primary mt-1 mr-2"></i>
+                                                  <span class="text-white/70">${feature}</span>
+                                              </li>
+                                          `,
+                                            )
+                                            .join("")}
+                                      </ul>
+
+                                      <div class="flex space-x-4">
+                                          ${project.demoLink ? `
+                                          <a href="${project.demoLink}" target="_blank" class="px-6 py-3 bg-primary hover:bg-opacity-90 text-white font-medium !rounded-button transition-all duration-300 whitespace-nowrap">
+                                              View Live Demo
+                                          </a>
+                                          ` : ''}
+                                          ${project.codeLink ? `
+                                          <a href="${project.codeLink}" target="_blank" class="px-6 py-3 bg-transparent border border-white/20 hover:border-white/40 text-white font-medium !rounded-button transition-all duration-300 whitespace-nowrap">
+                                              View Code
+                                          </a>
+                                          ` : ''}
+                                      </div>
+                                  </div>
+                              `;
+
+              // Show modal
+              modal.classList.add("open");
+              document.body.style.overflow = "hidden";
+            }
+          });
+        });
+
+        // Close modal
+        closeButton.addEventListener("click", () => {
+          modal.classList.remove("open");
+          document.body.style.overflow = "auto";
+        });
+
+        // Close modal when clicking outside
+        modal.addEventListener("click", (e) => {
+          if (e.target === modal) {
+            modal.classList.remove("open");
+            document.body.style.overflow = "auto";
+          }
+        });
+      });
+    </script>
+
+    <!-- Contact Form Script -->
+    <script id="contact-form-script">
+      document.addEventListener("DOMContentLoaded", function () {
+        const contactForm = document.getElementById("contact-form");
+        const successMessage = document.getElementById("success-message");
+        const errorMessage = document.getElementById("error-message");
+        const submitButton = document.getElementById("submit-btn");
+        const messageTextarea = document.getElementById("message");
+        const messageCounter = document.getElementById("message-counter");
+        
+        // Form submission tracking
+        let formStartTime = Date.now();
+        let lastSubmissionTime = 0;
+        const MIN_SUBMISSION_TIME = 3000; // 3 seconds minimum
+        const RATE_LIMIT_TIME = 60000; // 1 minute between submissions
+        
+        // Initialize form timestamp and timezone
+        document.getElementById("form-timestamp").value = formStartTime;
+        document.getElementById("form-timezone").value = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        
+        // Character counter for message
+        messageTextarea.addEventListener("input", function() {
+          const currentLength = this.value.length;
+          messageCounter.textContent = currentLength;
+          
+          if (currentLength > 900) {
+            messageCounter.classList.add("text-red-500");
+          } else {
+            messageCounter.classList.remove("text-red-500");
+          }
+        });
+        
+        // Function to show error message
+        function showError(message) {
+          errorMessage.textContent = message;
+          errorMessage.classList.remove("hidden");
+          setTimeout(() => {
+            errorMessage.classList.add("hidden");
+          }, 5000);
+        }
+        
+        // Function to show success message
+        function showSuccess() {
+          successMessage.classList.remove("hidden");
+          setTimeout(() => {
+            successMessage.classList.add("hidden");
+          }, 5000);
+        }
+        
+        // Function to validate email format
+        function isValidEmail(email) {
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          return emailRegex.test(email);
+        }
+        
+        // Function to detect URLs in text
+        function containsUrls(text) {
+          const urlRegex = /(https?:\/\/[^\s]+|www\.[^\s]+|[^\s]+\.[a-z]{2,})/gi;
+          return urlRegex.test(text);
+        }
+        
+        // Function to detect suspicious patterns
+        function containsSuspiciousContent(text) {
+          const suspiciousPatterns = [
+            /buy\s+now/i,
+            /click\s+here/i,
+            /free\s+offer/i,
+            /limited\s+time/i,
+            /act\s+now/i,
+            /money\s+back/i,
+            /guarantee/i,
+            /winner/i,
+            /congratulations/i,
+            /lottery/i,
+            /inheritance/i,
+            /urgent/i,
+            /viagra/i,
+            /casino/i,
+            /poker/i,
+            /loan/i,
+            /debt/i,
+            /credit/i,
+            /investment/i,
+            /bitcoin/i,
+            /crypto/i
+          ];
+          
+          return suspiciousPatterns.some(pattern => pattern.test(text));
+        }
+        
+        // Function to validate form submission time
+        function validateSubmissionTime() {
+          const currentTime = Date.now();
+          const timeSpent = currentTime - formStartTime;
+          
+          // Check if form was filled too quickly (likely a bot)
+          if (timeSpent < MIN_SUBMISSION_TIME) {
+            return {
+              valid: false,
+              message: "Please take your time to fill out the form properly."
+            };
+          }
+          
+          // Check rate limiting
+          if (currentTime - lastSubmissionTime < RATE_LIMIT_TIME) {
+            return {
+              valid: false,
+              message: "Please wait a moment before submitting another message."
+            };
+          }
+          
+          return { valid: true };
+        }
+        
+        // Function to validate honeypot fields
+        function validateHoneypot() {
+          const honeypotFields = [
+            document.querySelector('input[name="_honey"]'),
+            document.querySelector('input[name="_email_confirm"]'),
+            document.querySelector('input[name="_website"]'),
+            document.querySelector('input[name="_phone"]')
+          ];
+          
+          for (let field of honeypotFields) {
+            if (field && field.value.trim() !== '') {
+              return {
+                valid: false,
+                message: "Invalid form submission detected."
+              };
+            }
+          }
+          
+          return { valid: true };
+        }
+        
+        // Function to sanitize input
+        function sanitizeInput(input) {
+          return input.trim().replace(/[<>]/g, '');
+        }
+        
+        contactForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+          
+          // Get form values
+          const name = sanitizeInput(document.getElementById("name").value);
+          const email = sanitizeInput(document.getElementById("email").value);
+          const subject = sanitizeInput(document.getElementById("subject").value);
+          const message = sanitizeInput(document.getElementById("message").value);
+          
+          // Basic form validation
+          if (!name || !email || !subject || !message) {
+            showError("Please fill in all fields.");
+            return;
+          }
+          
+          // Length validation
+          if (name.length < 2 || name.length > 50) {
+            showError("Name must be between 2 and 50 characters.");
+            return;
+          }
+          
+          if (email.length > 100) {
+            showError("Email address is too long.");
+            return;
+          }
+          
+          if (subject.length < 5 || subject.length > 100) {
+            showError("Subject must be between 5 and 100 characters.");
+            return;
+          }
+          
+          if (message.length < 10 || message.length > 1000) {
+            showError("Message must be between 10 and 1000 characters.");
+            return;
+          }
+          
+          // Email validation
+          if (!isValidEmail(email)) {
+            showError("Please enter a valid email address.");
+            return;
+          }
+          
+          // Check for URLs in message (likely spam)
+          if (containsUrls(message)) {
+            showError("Messages containing links are not allowed for security reasons.");
+            return;
+          }
+          
+          // Check for suspicious content
+          if (containsSuspiciousContent(message) || containsSuspiciousContent(subject)) {
+            showError("Your message contains content that appears to be spam. Please revise your message.");
+            return;
+          }
+          
+          // Validate submission time
+          const timeValidation = validateSubmissionTime();
+          if (!timeValidation.valid) {
+            showError(timeValidation.message);
+            return;
+          }
+          
+          // Validate honeypot fields
+          const honeypotValidation = validateHoneypot();
+          if (!honeypotValidation.valid) {
+            showError(honeypotValidation.message);
+            return;
+          }
+          
+          // Show loading state
+          const originalButtonText = submitButton.innerHTML;
+          submitButton.innerHTML = "Sending...";
+          submitButton.disabled = true;
+          
+          // Update timestamp for rate limiting
+          lastSubmissionTime = Date.now();
+          
+          // Submit the form
+          contactForm.submit();
+        });
+        
+        // Reset form start time when user starts typing
+        const formInputs = contactForm.querySelectorAll('input, textarea');
+        formInputs.forEach(input => {
+          input.addEventListener('focus', function() {
+            if (formStartTime === 0) {
+              formStartTime = Date.now();
+              document.getElementById("form-timestamp").value = formStartTime;
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
