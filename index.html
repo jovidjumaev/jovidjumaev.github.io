@@ -2110,6 +2110,116 @@
         document.getElementById("form-timestamp").value = formStartTime;
         document.getElementById("form-timezone").value = Intl.DateTimeFormat().resolvedOptions().timeZone;
         
+        // Prevent default form submission
+        contactForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+          
+          // Get form values
+          const name = sanitizeInput(document.getElementById("name").value);
+          const email = sanitizeInput(document.getElementById("email").value);
+          const subject = sanitizeInput(document.getElementById("subject").value);
+          const message = sanitizeInput(document.getElementById("message").value);
+          
+          // Basic form validation
+          if (!name || !email || !subject || !message) {
+            showError("Please fill in all fields.");
+            return;
+          }
+          
+          // Length validation
+          if (name.length < 2 || name.length > 50) {
+            showError("Name must be between 2 and 50 characters.");
+            return;
+          }
+          
+          if (email.length > 100) {
+            showError("Email address is too long.");
+            return;
+          }
+          
+          if (subject.length < 5 || subject.length > 100) {
+            showError("Subject must be between 5 and 100 characters.");
+            return;
+          }
+          
+          if (message.length < 10 || message.length > 1000) {
+            showError("Message must be between 10 and 1000 characters.");
+            return;
+          }
+          
+          // Email validation
+          if (!isValidEmail(email)) {
+            showError("Please enter a valid email address.");
+            return;
+          }
+          
+          // Check for URLs in message (likely spam)
+          if (containsUrls(message)) {
+            showError("Messages containing links are not allowed for security reasons.");
+            return;
+          }
+          
+          // Check for suspicious content
+          if (containsSuspiciousContent(message) || containsSuspiciousContent(subject)) {
+            showError("Your message contains content that appears to be spam. Please revise your message.");
+            return;
+          }
+          
+          // Validate submission time
+          const timeValidation = validateSubmissionTime();
+          if (!timeValidation.valid) {
+            showError(timeValidation.message);
+            return;
+          }
+          
+          // Validate honeypot fields
+          const honeypotValidation = validateHoneypot();
+          if (!honeypotValidation.valid) {
+            showError(honeypotValidation.message);
+            return;
+          }
+          
+          // Show loading state
+          const originalButtonText = submitButton.innerHTML;
+          submitButton.innerHTML = "Sending...";
+          submitButton.disabled = true;
+          
+          // Update timestamp for rate limiting
+          lastSubmissionTime = Date.now();
+          
+          // Submit via fetch to bypass activation
+          fetch('https://formsubmit.co/ajax/jovid.jumaev01@gmail.com', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+              name: name,
+              email: email,
+              subject: subject,
+              message: message,
+              _subject: 'Portfolio Contact Form Submission',
+              _autoresponse: 'Thank you for your message. I will get back to you soon.'
+            })
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              window.location.href = 'thank-you.html';
+            } else {
+              showError('Failed to send message. Please try again.');
+              submitButton.innerHTML = originalButtonText;
+              submitButton.disabled = false;
+            }
+          })
+          .catch(error => {
+            showError('An error occurred. Please try again later.');
+            submitButton.innerHTML = originalButtonText;
+            submitButton.disabled = false;
+          });
+        });
+        
         // Character counter for message
         messageTextarea.addEventListener("input", function() {
           const currentLength = this.value.length;
@@ -2230,85 +2340,6 @@
           return input.trim().replace(/[<>]/g, '');
         }
         
-        contactForm.addEventListener("submit", function (e) {
-          e.preventDefault();
-          
-          // Get form values
-          const name = sanitizeInput(document.getElementById("name").value);
-          const email = sanitizeInput(document.getElementById("email").value);
-          const subject = sanitizeInput(document.getElementById("subject").value);
-          const message = sanitizeInput(document.getElementById("message").value);
-          
-          // Basic form validation
-          if (!name || !email || !subject || !message) {
-            showError("Please fill in all fields.");
-            return;
-          }
-          
-          // Length validation
-          if (name.length < 2 || name.length > 50) {
-            showError("Name must be between 2 and 50 characters.");
-            return;
-          }
-          
-          if (email.length > 100) {
-            showError("Email address is too long.");
-            return;
-          }
-          
-          if (subject.length < 5 || subject.length > 100) {
-            showError("Subject must be between 5 and 100 characters.");
-            return;
-          }
-          
-          if (message.length < 10 || message.length > 1000) {
-            showError("Message must be between 10 and 1000 characters.");
-            return;
-          }
-          
-          // Email validation
-          if (!isValidEmail(email)) {
-            showError("Please enter a valid email address.");
-            return;
-          }
-          
-          // Check for URLs in message (likely spam)
-          if (containsUrls(message)) {
-            showError("Messages containing links are not allowed for security reasons.");
-            return;
-          }
-          
-          // Check for suspicious content
-          if (containsSuspiciousContent(message) || containsSuspiciousContent(subject)) {
-            showError("Your message contains content that appears to be spam. Please revise your message.");
-            return;
-          }
-          
-          // Validate submission time
-          const timeValidation = validateSubmissionTime();
-          if (!timeValidation.valid) {
-            showError(timeValidation.message);
-            return;
-          }
-          
-          // Validate honeypot fields
-          const honeypotValidation = validateHoneypot();
-          if (!honeypotValidation.valid) {
-            showError(honeypotValidation.message);
-            return;
-          }
-          
-          // Show loading state
-          const originalButtonText = submitButton.innerHTML;
-          submitButton.innerHTML = "Sending...";
-          submitButton.disabled = true;
-          
-          // Update timestamp for rate limiting
-          lastSubmissionTime = Date.now();
-          
-          // Submit the form
-          contactForm.submit();
-        });
         
         // Reset form start time when user starts typing
         const formInputs = contactForm.querySelectorAll('input, textarea');
