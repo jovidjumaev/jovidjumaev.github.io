@@ -1425,17 +1425,10 @@
           </div>
 
           <div class="animate-on-scroll">
-            <form id="contact-form" method="POST" class="glass-card p-8 rounded-lg">
+            <form id="contact-form" action="https://formsubmit.co/jovid.jumaev01@gmail.com" method="POST" class="glass-card p-8 rounded-lg">
+              <input type="hidden" name="_next" value="https://jovidjumaev.github.io/thank-you.html">
+              <input type="hidden" name="_subject" value="Portfolio Contact Form Submission">
 
-              <!-- Enhanced honeypot fields to catch bots -->
-              <input type="text" name="_honey" style="display:none !important; position:absolute !important; left:-9999px !important;">
-              <input type="email" name="_email_confirm" style="display:none !important; position:absolute !important; left:-9999px !important;">
-              <input type="text" name="_website" style="display:none !important; position:absolute !important; left:-9999px !important;">
-              <input type="text" name="_phone" style="display:none !important; position:absolute !important; left:-9999px !important;">
-              
-              <!-- Time-based spam protection -->
-              <input type="hidden" name="_timestamp" id="form-timestamp">
-              <input type="hidden" name="_timezone" id="form-timezone">
 
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
                 <div>
@@ -2098,35 +2091,7 @@
         const MIN_SUBMISSION_TIME = 3000; // 3 seconds minimum
         const RATE_LIMIT_TIME = 60000; // 1 minute between submissions
         
-        // Initialize form timestamp and timezone
-        document.getElementById("form-timestamp").value = formStartTime;
-        document.getElementById("form-timezone").value = Intl.DateTimeFormat().resolvedOptions().timeZone;
         
-        // Handle form submission
-        contactForm.addEventListener("submit", async function(e) {
-          e.preventDefault();
-          
-          const name = document.getElementById('name').value;
-          const email = document.getElementById('email').value;
-          const subject = document.getElementById('subject').value;
-          const message = document.getElementById('message').value;
-          
-          // Show loading
-          submitButton.innerHTML = "Sending...";
-          submitButton.disabled = true;
-          
-          // Create email body
-          const emailBody = `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\n\nMessage:\n${message}`;
-          
-          // Use mailto (opens email client)
-          const mailtoLink = `mailto:jovid.jumaev01@gmail.com?subject=${encodeURIComponent('Portfolio Contact: ' + subject)}&body=${encodeURIComponent(emailBody)}`;
-          
-          // Try to open mailto
-          window.location.href = mailtoLink;
-          
-          // Note: This will open the user's email client
-          // If they want automatic sending without email client, they need to set up EmailJS
-        });
         
         // Character counter for message
         messageTextarea.addEventListener("input", function() {
@@ -2249,16 +2214,6 @@
         }
         
         
-        // Reset form start time when user starts typing
-        const formInputs = contactForm.querySelectorAll('input, textarea');
-        formInputs.forEach(input => {
-          input.addEventListener('focus', function() {
-            if (formStartTime === 0) {
-              formStartTime = Date.now();
-              document.getElementById("form-timestamp").value = formStartTime;
-            }
-          });
-        });
       });
     </script>
   </body>
