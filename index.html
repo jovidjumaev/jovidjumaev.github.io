@@ -1426,9 +1426,15 @@
 
           <div class="animate-on-scroll">
             <form id="contact-form" action="https://formsubmit.co/joviidjumaev@gmail.com" method="POST" class="glass-card p-8 rounded-lg">
-              <!-- Send activation email to same address -->
-              <input type="hidden" name="_cc" value="joviidjumaev@gmail.com">
+              <!-- Redirect after submission -->
+              <input type="hidden" name="_next" value="https://jovidjumaev.github.io/thank-you.html">
               
+              <!-- Custom subject -->
+              <input type="hidden" name="_subject" value="Portfolio Contact Form Submission">
+              
+              <!-- Auto response message -->
+              <input type="hidden" name="_autoresponse" value="Thank you for your message. I will get back to you soon.">
+
               <!-- Enhanced honeypot fields to catch bots -->
               <input type="text" name="_honey" style="display:none !important; position:absolute !important; left:-9999px !important;">
               <input type="email" name="_email_confirm" style="display:none !important; position:absolute !important; left:-9999px !important;">
@@ -1438,22 +1444,6 @@
               <!-- Time-based spam protection -->
               <input type="hidden" name="_timestamp" id="form-timestamp">
               <input type="hidden" name="_timezone" id="form-timezone">
-              
-              <!-- Disable captcha -->
-              <input type="hidden" name="_captcha" value="false">
-              
-              <!-- Specify redirect after submission -->
-              <input type="hidden" name="_next" value="https://jovidjumaev.github.io/thank-you.html">
-              
-              <!-- Custom subject -->
-              <input type="hidden" name="_subject" value="Portfolio Contact Form Submission">
-              
-              <!-- Disable auto response -->
-              <input type="hidden" name="_autoresponse" value="Thank you for your message. I will get back to you soon.">
-
-              <!-- Disable FormSubmit branding -->
-              <input type="hidden" name="_template" value="box">
-              <input type="hidden" name="_format" value="plain">
 
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
                 <div>
