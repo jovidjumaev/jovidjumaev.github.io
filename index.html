@@ -1427,7 +1427,8 @@
           <div class="animate-on-scroll">
             <form id="contact-form" action="https://formsubmit.co/jovid.jumaev01@gmail.com" method="POST" class="glass-card p-8 rounded-lg">
               <input type="hidden" name="_next" value="https://jovidjumaev.github.io/thank-you.html">
-              <input type="hidden" name="_subject" value="Portfolio Contact Form Submission">
+              <input type="hidden" name="_subject" value="Portfolio Contact Form - New Message">
+              <input type="hidden" name="_replyto" value="" id="_replyto">
 
 
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
@@ -2091,7 +2092,14 @@
         const MIN_SUBMISSION_TIME = 3000; // 3 seconds minimum
         const RATE_LIMIT_TIME = 60000; // 1 minute between submissions
         
-        
+        // Set reply-to email on form submit
+        contactForm.addEventListener("submit", function() {
+          const emailInput = document.getElementById("email");
+          const replyToInput = document.getElementById("_replyto");
+          if (emailInput && replyToInput) {
+            replyToInput.value = emailInput.value;
+          }
+        });
         
         // Character counter for message
         messageTextarea.addEventListener("input", function() {
