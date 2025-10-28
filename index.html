@@ -2200,20 +2200,23 @@
               subject: subject,
               message: message,
               _subject: 'Portfolio Contact Form Submission',
-              _autoresponse: 'Thank you for your message. I will get back to you soon.'
+              _autoresponse: 'Thank you for your message. I will get back to you soon.',
+              _captcha: false
             })
           })
           .then(response => response.json())
           .then(data => {
+            console.log('Form submission response:', data);
             if (data.success) {
               window.location.href = 'thank-you.html';
             } else {
-              showError('Failed to send message. Please try again.');
+              showError(data.message || 'Failed to send message. Please try again.');
               submitButton.innerHTML = originalButtonText;
               submitButton.disabled = false;
             }
           })
           .catch(error => {
+            console.error('Form submission error:', error);
             showError('An error occurred. Please try again later.');
             submitButton.innerHTML = originalButtonText;
             submitButton.disabled = false;
